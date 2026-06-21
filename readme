@@ -1,0 +1,57 @@
+# 🧾 Receipt Manager
+
+A Streamlit app for smart receipt tracking with Gemini Vision OCR.
+
+## Setup
+
+### 1. Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+
+```
+
+`.env` variables:
+| Key | Description |
+|-----|-------------|
+| `DB_USER` | PostgreSQL username |
+| `DB_PASSWORD` | PostgreSQL password |
+| `DB_HOST` | Database host (e.g. `localhost`) |
+| `DB_PORT` | Port (default `5432`) |
+| `DB_NAME` | Database name |
+| `GEMINI_API_KEY` | Google Gemini API key |
+
+
+
+### 3. Run the app
+```bash
+streamlit run Home.py
+```
+
+---
+
+## Pages
+
+### 🏠 Home
+Landing page with two action cards.
+
+### 📄 Upload Receipt
+- **Manual mode** — type all fields directly
+- **Auto mode** — upload a receipt image, click "Analyze", Gemini extracts all fields
+- Each field has a **↻ reload button** to re-extract just that field if OCR was wrong
+- Validates: receipt number (digits only), required fields, item quantities/prices
+- Saves to PostgreSQL on submit
+
+### 🗂️ History
+- Shows all saved receipts in a table
+- Filterable by **shop name**, **date range**, **receipt number**
+- Each row has an **Open →** button that opens the receipt in read-only view
+
+---
+
+## Supported Image Formats
+PNG, JPG/JPEG, WebP, GIF, BMP, TIFF, HEIC
+
+## Models used
+- **models/gemini-flash-lite-latest** for OCR extraction
